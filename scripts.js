@@ -20,10 +20,30 @@ function playRound(playerSelection, computerSelection) {
     }
 
     if (playerSelection === 'Rock' && computerSelection === 'Scissors' || playerSelection === 'Scissors' && computerSelection === 'Paper' || playerSelection === 'Paper' && computerSelection === 'Rock') {
-        return `You Win! ${playerSelection} beats ${computerSelection}`;
+        console.log(`You Win! ${playerSelection} beats ${computerSelection}`);
+        return 'Player';
     }
 
-    return `You Lose! ${computerSelection} beats ${playerSelection}`;
+    console.log(`You Lose! ${computerSelection} beats ${playerSelection}`);
+    return 'Computer';
 }
 
-console.log(playRound(getPlayerChoice(), getComputerChoice()));
+function game() {
+    let playerScore = 0;
+    let computerScore = 0;
+    let roundResult = '';
+
+    for (let i = 0; i < 5; i++) {
+        console.log(`Round ${i + 1}:\n`)
+        roundResult = playRound(getPlayerChoice(), getComputerChoice());
+        if (roundResult === 'Player') {
+            playerScore++;
+        } else {
+            computerScore++;
+        }
+    }
+
+    return playerScore > computerScore ? `You Win! Final score:\nPlayer - ${playerScore}, Computer - ${computerScore}` : `You Lose! Final score:\nPlayer - ${playerScore}, Computer - ${computerScore}`
+}
+
+console.log(game());
