@@ -1,9 +1,12 @@
+function capitalize(str) { return `${str.at(0).toUpperCase()}${str.slice(1).toLowerCase()}`; }
+
 function getHumanChoice() {
     let choice = "";
 
     do  {
-        choice = prompt("Enter choice:", "").toLowerCase();
-    } while (choice != 'rock' && choice != 'paper' && choice != 'scissors');
+        choice = capitalize(prompt("Enter choice:", ""));
+        console.log(choice);
+    } while (choice != 'Rock' && choice != 'Paper' && choice != 'Scissors');
 
     return choice;
 }
@@ -15,11 +18,11 @@ function getComputerChoice() {
 
     switch(choiceNum) {
         case 0:
-            return 'rock';
+            return 'Rock';
         case 1:
-            return 'paper';
+            return 'Paper';
         case 2:
-            return 'scissors';
+            return 'Scissors';
     }
 }
 
@@ -46,10 +49,10 @@ function playRound() {
 
 function printGameWinner(humanFinalScore, computerFinalScore) {
     if (humanFinalScore > computerFinalScore) {
-        console.log('You win!');
+        console.log(`You win! Final score: Human ${humanFinalScore}, Computer ${computerFinalScore}`);
     }
     else if (humanFinalScore < computerFinalScore) {
-        console.log('You lose!');
+        console.log(`You lose! Final score: Human ${humanFinalScore}, Computer ${computerFinalScore}`);
     }
     else {
         console.log('Tie!');
