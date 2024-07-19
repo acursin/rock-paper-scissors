@@ -1,3 +1,4 @@
+// Prompt user for choice of rock, paper, or scissors and reject invalid choices
 function getHumanChoice() {
     let choice = prompt('Enter choice:', '').toLowerCase();
 
@@ -8,9 +9,10 @@ function getHumanChoice() {
     return choice;
 }
 
+// Randomly choose rock, paper, or scissors for computer
 function getComputerChoice() {
     const NUM_CHOICES = 3;
-    
+
     const choiceNum = Math.floor(Math.random() * NUM_CHOICES);
 
     switch(choiceNum) {
@@ -23,12 +25,11 @@ function getComputerChoice() {
     }
 }
 
+// Capitalize string
 function capitalize(str) { return `${str.at(0).toUpperCase()}${str.slice(1).toLowerCase()}`; }
 
-function playRound() {
-    const humanChoice =  getHumanChoice();
-    const computerChoice = getComputerChoice();
-
+// Play one round of rock paper scissors, return the winner and print message to console
+function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
         console.log(`Tie! You both picked ${humanChoice}!`);
         return 'tie';
@@ -46,6 +47,7 @@ function playRound() {
     return 'computer';
 }
 
+// Print the final winner of multiple rounds
 function printGameWinner(humanFinalScore, computerFinalScore) {
     const FINAL_SCORE_MSG = `Final score: Human - ${humanFinalScore}, Computer - ${computerFinalScore}`;
 
@@ -62,13 +64,13 @@ function printGameWinner(humanFinalScore, computerFinalScore) {
     return;
 }
 
+// Play a certain number of rounds, keep track of score, and declare a winner
 function playGame(rounds) {
-
     let humanScore = 0;
     let computerScore = 0;
 
     for (let i = 0; i < rounds; i++) {
-        let winner = playRound();
+        let winner = playRound(getHumanChoice(), getComputerChoice());
 
         if (winner === 'human') {humanScore++};
         if (winner === 'computer') {computerScore++};
