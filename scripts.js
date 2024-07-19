@@ -1,61 +1,62 @@
-function capitalize(str) { return `${str.at(0).toUpperCase()}${str.slice(1).toLowerCase()}`; }
-
 function getHumanChoice() {
-    let choice = "";
+    let choice = prompt('Enter choice:', '').toLowerCase();
 
-    do  {
-        choice = capitalize(prompt("Enter choice:", ""));
-        console.log(choice);
-    } while (choice != 'Rock' && choice != 'Paper' && choice != 'Scissors');
+    while (choice != 'rock' && choice != 'paper' && choice != 'scissors') {
+        choice = prompt('Invalid choice. Try again:', '').toLowerCase()
+    }
 
     return choice;
 }
 
 function getComputerChoice() {
     const NUM_CHOICES = 3;
-
+    
     const choiceNum = Math.floor(Math.random() * NUM_CHOICES);
 
     switch(choiceNum) {
         case 0:
-            return 'Rock';
+            return 'rock';
         case 1:
-            return 'Paper';
+            return 'paper';
         case 2:
-            return 'Scissors';
+            return 'scissors';
     }
 }
+
+function capitalize(str) { return `${str.at(0).toUpperCase()}${str.slice(1).toLowerCase()}`; }
 
 function playRound() {
     const humanChoice =  getHumanChoice();
     const computerChoice = getComputerChoice();
 
     if (humanChoice === computerChoice) {
-        console.log(`Tie! ${humanChoice} is the same as ${computerChoice}.`);
+        console.log(`Tie! You both picked ${humanChoice}!`);
         return 'tie';
     }
 
-    if (humanChoice === 'Rock' && computerChoice === 'Scissors'
-        || humanChoice === 'Paper' && computerChoice === 'Rock'
-        || humanChoice === 'Scissors' && computerChoice === 'Paper'
+    if (humanChoice === 'rock' && computerChoice === 'scissors'
+        || humanChoice === 'paper' && computerChoice === 'rock'
+        || humanChoice === 'scissors' && computerChoice === 'paper'
     ) {
-        console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+        console.log(`You win! ${capitalize(humanChoice)} beats ${computerChoice}.`);
         return 'human';
     }
 
-    console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+    console.log(`You lose! ${capitalize(computerChoice)} beats ${humanChoice}.`);
     return 'computer';
 }
 
 function printGameWinner(humanFinalScore, computerFinalScore) {
+    const FINAL_SCORE_MSG = `Final score: Human - ${humanFinalScore}, Computer - ${computerFinalScore}`;
+
     if (humanFinalScore > computerFinalScore) {
-        console.log(`You win! Final score: Human ${humanFinalScore}, Computer ${computerFinalScore}`);
+        console.log(`You win! ${FINAL_SCORE_MSG}`);
     }
     else if (humanFinalScore < computerFinalScore) {
-        console.log(`You lose! Final score: Human ${humanFinalScore}, Computer ${computerFinalScore}`);
+        console.log(`You lose! ${FINAL_SCORE_MSG}`);
     }
     else {
-        console.log('Tie!');
+        console.log(`Tie! ${FINAL_SCORE_MSG}`);
     }
 
     return;
