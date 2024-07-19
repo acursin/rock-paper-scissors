@@ -35,9 +35,9 @@ function playRound() {
         return 'tie';
     }
 
-    if (humanChoice === 'rock' && computerChoice === 'scissors'
-        || humanChoice === 'paper' && computerChoice === 'rock'
-        || humanChoice === 'scissors' && computerChoice === ''
+    if (humanChoice === 'Rock' && computerChoice === 'Scissors'
+        || humanChoice === 'Paper' && computerChoice === 'Rock'
+        || humanChoice === 'Scissors' && computerChoice === 'Paper'
     ) {
         console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
         return 'human';
