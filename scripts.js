@@ -44,6 +44,7 @@ function playGame(rounds) {
 }
 
 const buttons = document.querySelectorAll("button");
+const results = document.querySelector('.results');
 buttons.forEach((button) => {
     button.addEventListener("click", playRound);
 });
@@ -67,23 +68,37 @@ function getComputerChoice() {
 // Capitalize string
 function capitalize(str) { return `${str.at(0).toUpperCase()}${str.slice(1).toLowerCase()}`; }
 
+function recordResult(result, humanChoice, computerChoice) {
+    switch (result) {
+        case 'tie':
+            console.log(`Tie! You both picked ${humanChoice}!`);
+            break;
+        case 'human':
+            console.log(`You win! ${capitalize(humanChoice)} beats ${computerChoice}.`);
+            break;
+        case 'computer':
+            console.log(`You lose! ${capitalize(computerChoice)} beats ${humanChoice}.`);
+            break;
+    }
+}
+
 // Play one round of rock paper scissors, return the winner and print message to console
 function playRound(e) {
-    const humanChoice = e.currentTarget.value;
-    const computerChoice =  getComputerChoice();
-    if (humanChoice === computerChoice) {
-        console.log(`Tie! You both picked ${humanChoice}!`);
+    const humanSelection = e.currentTarget.value;
+    const computerSelection =  getComputerChoice();
+    if (humanSelection === computerSelection) {
+        recordResult('tie', humanSelection, computerSelection);
         return 'tie';
     }
 
-    if (humanChoice === 'rock' && computerChoice === 'scissors'
-        || humanChoice === 'paper' && computerChoice === 'rock'
-        || humanChoice === 'scissors' && computerChoice === 'paper'
+    if (humanSelection === 'rock' && computerSelection === 'scissors'
+        || humanSelection === 'paper' && computerSelection === 'rock'
+        || humanSelection === 'scissors' && computerSelection === 'paper'
     ) {
-        console.log(`You win! ${capitalize(humanChoice)} beats ${computerChoice}.`);
+        recordResult('human', humanSelection, computerSelection);
         return 'human';
     }
 
-    console.log(`You lose! ${capitalize(computerChoice)} beats ${humanChoice}.`);
+    recordResult('computer', humanSelection, computerSelection);
     return 'computer';
 }
