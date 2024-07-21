@@ -67,8 +67,12 @@ function getComputerChoice() {
 // Capitalize string
 function capitalize(str) { return `${str.at(0).toUpperCase()}${str.slice(1).toLowerCase()}`; }
 
+// Add result message to DOM
 function recordResult(resultMessage) {
-    console.log(resultMessage);
+    const results = document.querySelector(".results");
+    const currentResult = document.createElement("p");
+    currentResult.textContent = resultMessage;
+    results.appendChild(currentResult);
 }
 
 // Play one round of rock paper scissors, return the winner and record the result
