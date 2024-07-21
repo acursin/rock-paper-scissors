@@ -69,6 +69,20 @@ function recordResult(resultMessage) {
     results.appendChild(currentResult);
 }
 
+function updateScore(winner) {
+    if (winner === "human") {
+        const humanScore = document.querySelector(".humanScore");
+        humanScore.dataset.score = +humanScore.dataset.score + 1;
+        humanScore.textContent = `Human: ${humanScore.dataset.score}`;
+    } else if (winner === "computer") {
+        const computerScore = document.querySelector(".computerScore");
+        computerScore.dataset.score = +computerScore.dataset.score + 1;
+        computerScore.textContent = `Computer: ${computerScore.dataset.score}`
+    }
+
+    return;
+}
+
 function playRound(e) {
 
     const humanChoice = e.currentTarget.value;
@@ -83,9 +97,11 @@ function playRound(e) {
         || humanChoice === "scissors" && computerChoice === "paper"
     ) {
         recordResult(`You win! ${capitalize(humanChoice)} beats ${computerChoice}.`);
+        updateScore("human");
         return "human";
     }
 
     recordResult(`You lose! ${capitalize(computerChoice)} beats ${humanChoice}.`);
+    updateScore("computer");
     return "computer";
 }
