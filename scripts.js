@@ -74,23 +74,18 @@ function playRound(e) {
     const humanChoice = e.currentTarget.value;
     const computerChoice =  getComputerChoice();
 
-    let resultMessage = "";
-    let winner = "";
-
     if (humanChoice === computerChoice) {
-        resultMessage = `Tie! You both picked ${humanChoice}!`
-        winner = "tie";
-    } else if (humanChoice === "rock" && computerChoice === "scissors"
+        recordResult(`Tie! You both picked ${humanChoice}!`);
+        return "tie";
+    }
+    if (humanChoice === "rock" && computerChoice === "scissors"
         || humanChoice === "paper" && computerChoice === "rock"
         || humanChoice === "scissors" && computerChoice === "paper"
     ) {
-        resultMessage = `You win! ${capitalize(humanChoice)} beats ${computerChoice}.`
-        winner = "human";
-    } else {
-        resultMessage = `You lose! ${capitalize(computerChoice)} beats ${humanChoice}.`
-        winner = "computer";
+        recordResult(`You win! ${capitalize(humanChoice)} beats ${computerChoice}.`);
+        return "human";
     }
 
-    recordResult(resultMessage);
-    return winner;
+    recordResult(`You lose! ${capitalize(computerChoice)} beats ${humanChoice}.`);
+    return "computer";
 }
