@@ -1,9 +1,9 @@
 // Prompt user for choice of rock, paper, or scissors and reject invalid choices
 function getHumanChoice() {
-    let choice = prompt('Enter choice:', '').toLowerCase();
+    let choice = prompt("Enter choice:", "").toLowerCase();
 
-    while (choice != 'rock' && choice != 'paper' && choice != 'scissors') {
-        choice = prompt('Invalid choice. Try again:', '').toLowerCase()
+    while (choice != "rock" && choice != "paper" && choice != "scissors") {
+        choice = prompt("Invalid choice. Try again:", "").toLowerCase()
     }
 
     return choice;
@@ -34,8 +34,8 @@ function playGame(rounds) {
     for (let i = 0; i < rounds; i++) {
         let winner = playRound(getHumanChoice(), getComputerChoice());
 
-        if (winner === 'human') {humanScore++};
-        if (winner === 'computer') {computerScore++};
+        if (winner === "human") {humanScore++};
+        if (winner === "computer") {computerScore++};
     }
 
     printGameWinner(humanScore, computerScore);
@@ -44,7 +44,6 @@ function playGame(rounds) {
 }
 
 const buttons = document.querySelectorAll("button");
-const results = document.querySelector('.results');
 buttons.forEach((button) => {
     button.addEventListener("click", playRound);
 });
@@ -57,48 +56,44 @@ function getComputerChoice() {
 
     switch(choiceNum) {
         case 0:
-            return 'rock';
+            return "rock";
         case 1:
-            return 'paper';
+            return "paper";
         case 2:
-            return 'scissors';
+            return "scissors";
     }
 }
 
 // Capitalize string
 function capitalize(str) { return `${str.at(0).toUpperCase()}${str.slice(1).toLowerCase()}`; }
 
-function recordResult(result, humanChoice, computerChoice) {
-    switch (result) {
-        case 'tie':
-            console.log(`Tie! You both picked ${humanChoice}!`);
-            break;
-        case 'human':
-            console.log(`You win! ${capitalize(humanChoice)} beats ${computerChoice}.`);
-            break;
-        case 'computer':
-            console.log(`You lose! ${capitalize(computerChoice)} beats ${humanChoice}.`);
-            break;
-    }
+function recordResult(resultMessage) {
+    console.log(resultMessage);
 }
 
-// Play one round of rock paper scissors, return the winner and print message to console
+// Play one round of rock paper scissors, return the winner and record the result
 function playRound(e) {
-    const humanSelection = e.currentTarget.value;
-    const computerSelection =  getComputerChoice();
-    if (humanSelection === computerSelection) {
-        recordResult('tie', humanSelection, computerSelection);
-        return 'tie';
-    }
 
-    if (humanSelection === 'rock' && computerSelection === 'scissors'
-        || humanSelection === 'paper' && computerSelection === 'rock'
-        || humanSelection === 'scissors' && computerSelection === 'paper'
+    const humanChoice = e.currentTarget.value;
+    const computerChoice =  getComputerChoice();
+
+    let resultMessage = "";
+    let winner = "";
+
+    if (humanChoice === computerChoice) {
+        resultMessage = `Tie! You both picked ${humanChoice}!`
+        winner = "tie";
+    } else if (humanChoice === "rock" && computerChoice === "scissors"
+        || humanChoice === "paper" && computerChoice === "rock"
+        || humanChoice === "scissors" && computerChoice === "paper"
     ) {
-        recordResult('human', humanSelection, computerSelection);
-        return 'human';
+        resultMessage = `You win! ${capitalize(humanChoice)} beats ${computerChoice}.`
+        winner = "human";
+    } else {
+        resultMessage = `You lose! ${capitalize(computerChoice)} beats ${humanChoice}.`
+        winner = "computer";
     }
 
-    recordResult('computer', humanSelection, computerSelection);
-    return 'computer';
+    recordResult(resultMessage);
+    return winner;
 }
