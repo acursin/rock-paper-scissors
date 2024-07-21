@@ -1,4 +1,3 @@
-// Prompt user for choice of rock, paper, or scissors and reject invalid choices
 function getHumanChoice() {
     let choice = prompt("Enter choice:", "").toLowerCase();
 
@@ -9,7 +8,6 @@ function getHumanChoice() {
     return choice;
 }
 
-// Print the final winner of multiple rounds
 function printGameWinner(humanFinalScore, computerFinalScore) {
     const FINAL_SCORE_MSG = `Final score: Human - ${humanFinalScore}, Computer - ${computerFinalScore}`;
 
@@ -26,7 +24,6 @@ function printGameWinner(humanFinalScore, computerFinalScore) {
     return;
 }
 
-// Play a certain number of rounds, keep track of score, and declare a winner
 function playGame(rounds) {
     let humanScore = 0;
     let computerScore = 0;
@@ -48,7 +45,6 @@ buttons.forEach((button) => {
     button.addEventListener("click", playRound);
 });
 
-// Randomly choose rock, paper, or scissors for computer
 function getComputerChoice() {
     const NUM_CHOICES = 3;
 
@@ -64,10 +60,8 @@ function getComputerChoice() {
     }
 }
 
-// Capitalize string
 function capitalize(str) { return `${str.at(0).toUpperCase()}${str.slice(1).toLowerCase()}`; }
 
-// Add result message to DOM
 function recordResult(resultMessage) {
     const results = document.querySelector(".results");
     const currentResult = document.createElement("p");
@@ -75,7 +69,6 @@ function recordResult(resultMessage) {
     results.appendChild(currentResult);
 }
 
-// Play one round of rock paper scissors, return the winner and record the result
 function playRound(e) {
 
     const humanChoice = e.currentTarget.value;
