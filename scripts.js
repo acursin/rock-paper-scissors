@@ -1,3 +1,5 @@
+let gameState = "playing";
+
 const buttons = document.querySelectorAll("button");
 buttons.forEach((button) => {
     button.addEventListener("click", playRound);
@@ -24,7 +26,7 @@ function recordResult(resultMessage) {
     const results = document.querySelector(".results");
     const currentResult = document.createElement("p");
     currentResult.textContent = resultMessage;
-    results.appendChild(currentResult);
+    results.insertBefore(currentResult, results.firstElementChild);
 }
 
 function updateScore(winner) {
@@ -71,8 +73,17 @@ function printGameWinner() {
     return;
 }
 
+function clearResults() {
+    const results = document.querySelector(".results");
+    results.replaceChildren();
+}
+
 
 function playRound(e) {
+    if (gameState === "over") {
+        clearResults();
+        gameState = "playing";
+    }
 
     const humanChoice = e.currentTarget.value;
     const computerChoice =  getComputerChoice();
@@ -98,6 +109,7 @@ function playRound(e) {
     if (winningScore === 5) {
         printGameWinner();
         updateScore("reset");
+        gameState = "over";
     }
 
     return;
