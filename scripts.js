@@ -63,7 +63,7 @@ function printGameWinner() {
 
     const FINAL_SCORE_MSG = `Final score: Human - ${humanFinalScore.dataset.score}, Computer - ${computerFinalScore.dataset.score}`;
 
-    if (humanFinalScore > computerFinalScore) {
+    if (humanFinalScore.dataset.score > computerFinalScore.dataset.score) {
         recordResult(`You win! ${FINAL_SCORE_MSG}`);
     }
     else {
